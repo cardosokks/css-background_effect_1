@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Imagens Aleatórias no Fundo</title>
+  <style>
+  body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background-color: #11111100;
+}
+
+#background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.bg-image {
+  position: absolute;
+  opacity: 0.6;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div id="background-container"></div>
+  <script>
+  window.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('background-container');
+
+  const imageList = [
+    'images/img1.png',
+    'images/img2.png',
+    'images/img3.png',
+    'images/img4.png'
+  ];
+
+  const total = 30;
+
+  for (let i = 0; i < total; i++) {
+    const img = document.createElement('img');
+    
+    // Escolher imagem aleatória da lista
+    const randomImage = imageList[Math.floor(Math.random() * imageList.length)];
+    img.src = randomImage;
+
+    img.className = 'bg-image';
+
+    const size = Math.random() * 40 + 20;
+    img.style.width = `${size}px`;
+    img.style.height = `${size}px`;
+
+    img.style.left = `${Math.random() * 100}%`;
+    img.style.top = `${Math.random() * 100}%`;
+
+    img.style.animationDuration = `${Math.random() * 20 + 5}s`;
+    img.style.animationDelay = `${Math.random() * 5}s`;
+
+    container.appendChild(img);
+  }
+});
+</script>
+</body>
+</html>
